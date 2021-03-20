@@ -3,7 +3,6 @@ Using docker for reproducing analysis using R studio
 
 ### Installing
 
-There are two things you need to install: Docker and 
 #### Windows
 You need to know what your Windows version: Start button > Settings > System > About.  
 
@@ -17,4 +16,20 @@ For [64-bit: Home](https://docs.docker.com/docker-for-windows/install-windows-ho
 Please go [Here](https://docs.docker.com/engine/install/) for other engines.
 
 
+
+## Topics to cover
+
+### Introduction to Docker: Concept and usage
+
+### Search for images
+
+### Pull
+
+### Make changes
+
+### Save new image
+
+### Upload to the hub
+
+### Working with github
 
