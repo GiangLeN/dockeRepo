@@ -19,11 +19,49 @@ Please go [Here](https://docs.docker.com/engine/install/) for other engines.
 
 ## Topics to cover
 
-### Introduction to Docker: Concept and usage
+### Introduction to Docker: Concept and usage  
+Docker = Container  
+Store information about the environment so that scripts can be reproduced.  
+Can be recreate from "text" (Dockerfile) or image (Docker image).
 
-### Search for images
+### Search for images  
 
-### Pull
+- Go to [https://hub.docker.com/](https://hub.docker.com/)  
+- Search for:
+``` rocker/rstudio ``` 
+- **tag** specific time point of the image  
+
+### Pull  
+
+You can pull the image to your machine
+```
+docker pull rocker/rstudio:4.0.4
+```
+or  
+
+Run straight away from the command. Docker will try to search and download the appropriate image.  
+
+```
+docker run --rm -p 8787:8787 -e PASSWORD=mumc  -v  /mnt/c/Users/giang/Documents/:/home/rstudio rocker/rstudio:4.0.4
+```
+
+**-p** port, *must be 8787*  
+**-e** environment, *for this image (rocker/rstudio) must specify password*  
+**-v** mount directory, *location you want your files to be saved*  
+**docker image name** *at the end* 
+
+
+Note: for windows user, you can access C: drive through /mnt/c/  
+
+### Accessing Rstudio
+
+Open you internet browser and type in:  
+```http://localhost:8787/```
+
+Username: ```rstudio```  
+
+Password: ```mumc```  
+
 
 ### Make changes
 
