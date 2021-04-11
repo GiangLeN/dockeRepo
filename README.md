@@ -65,6 +65,41 @@ Password: ```mumc```
 
 ### Make changes
 
+#### Install packages
+You should be able to install R packages as usual.
+
+#### Generating data and figures
+
+
+### Accessing files
+
+Using right hand side upload and export.  
+
+or
+
+Use the command line:
+
+Check current running images:
+
+```
+docker ps -a
+```
+Note down the container ID name.  
+
+To ascess the files though the linux system run the following command.  
+
+```
+docker exec –it << Docker image >> /bin/bash
+```
+
+From there you can navigate around similarly to a linux system
+
+#### Copying files using linux
+
+```
+docker cp << Docker image >> :file/path wanted/path
+```
+
 ### Save new image
 
 ### Upload to the hub
