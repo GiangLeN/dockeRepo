@@ -42,7 +42,7 @@ or
 Run straight away from the command. Docker will try to search and download the appropriate image.  
 
 ```
-docker run --rm -p 8787:8787 -e PASSWORD=mumc  -v  /mnt/c/Users/giang/Documents/:/home/rstudio rocker/rstudio:4.0.4
+docker run --rm -p 8787:8787 -e PASSWORD=mumc  -v  /mnt/c/Users/giang/OneDrive/Maastricht/Tutorials/:/home/rstudio rocker/rstudio:4.0.4
 ```
 
 **-p** port, *must be 8787*  
@@ -52,37 +52,66 @@ docker run --rm -p 8787:8787 -e PASSWORD=mumc  -v  /mnt/c/Users/giang/Documents/
 
 
 Note: for windows user, you can access C: drive through /mnt/c/  
+Note2: You can use double tab to fill in text
 
 ### Accessing Rstudio
+Go to the docker app and click on open in browser   
+
+or
 
 Open you internet browser and type in:  
 ```http://localhost:8787/```
 
+Fill in as follow:  
 Username: ```rstudio```  
-
 Password: ```mumc```  
 
 
 ### Make changes
 
-#### Install packages
 You should be able to install R packages as usual.
 
-#### Generating data and figures
+```
+install.packages("dygraphs")
+install.packages("xts")
+```
+Create an interactive plot. Example taken from [r-graph-gallery](https://www.r-graph-gallery.com/)
 
+```
+# Libraries
+library(dygraphs)
+library(xts) # To make the convertion data-frame / xts format
 
-### Accessing files
+# Format 3: Several variables for each date
+data <- data.frame(
+  time=seq(from=Sys.Date()-40, to=Sys.Date(), by=1 ), 
+  value1=runif(41), 
+  value2=runif(41)+0.7
+)
+
+# Then you can create the xts format:
+don=xts( x=data[,-1], order.by=data$time)
+
+# Chart
+p <- dygraph(don)
+p
+
+# save the widget
+library(htmlwidgets)
+saveWidget(p, file=paste0( getwd(), "/dygraphs316-3.html"))
+```
 
 Using right hand side upload and export.  
 
-or
 
-Use the command line:
+### Accessing files (Expert command)
 
 Check current running images:
 
 ```
-docker ps -a
+docker ps # See current running images
+# or
+docker ps -a # See all images
 ```
 Note down the container ID name.  
 
@@ -96,13 +125,74 @@ From there you can navigate around similarly to a linux system
 
 #### Copying files using linux
 
+Create empty file  
+
 ```
-docker cp << Docker image >> :file/path wanted/path
+touch dockerfun.txt
+```
+Copy to the rstudio directory.
+```
+docker cp file/path << Docker image >>:/home/rstudio
+```
+You should be able to see the new file in rstudio
+
+
+Copy from Rstudio to machine.
+```
+docker cp << Docker image >>:/home/rstudio/dygraphs316-3.html ./
 ```
 
-### Save new image
+### Save new image  
+
+```
+docker commit << Docker image >> hubName/imageName:tag
+```
+docker commit << Docker image >> ngocgiangle/interactive:latest  
+
+Check with ``` docker images ```
+
+Save as zip file
+```
+docker save hubUserName/imageName:tag > newname.tar
+```
+
+### Stop image
+
+```
+Ctrl + C
+
+exit
+
+docker stop container_name
+
+```
 
 ### Upload to the hub
 
+Login to docker hub
+```
+docker login --username=yourhubusername --email=youremail@company.com
+```
+You can change the tag of the image  
+```
+docker tag << Docker image >> hubUserName/imageName:newTag
+```
+
+### Clean up docker
+
+```
+docker images
+docker rmi << Docker image >>
+docker images
+```
+
+Load docker image from zip file
+
+```
+docker load --input interactive.tar
+docker images
+```
+
 ### Working with github
+
 
