@@ -1,0 +1,37 @@
+---
+title: "interactive"
+author: "Giang"
+date: "4/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r libs}
+library(dygraphs)
+library(xts)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r activeFig, echo=FALSE}
+data <- data.frame(
+  time=seq(from=Sys.Date()-40, to=Sys.Date(), by=1 ), 
+  value1=runif(41), 
+  value2=runif(41)+0.7
+)
+
+# Then you can create the xts format:
+don=xts( x=data[,-1], order.by=data$time)
+
+# Chart
+p <- dygraph(don)
+p
+```
+
+
