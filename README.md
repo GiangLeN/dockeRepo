@@ -193,6 +193,40 @@ docker load --input interactive.tar
 docker images
 ```
 
+## Example
 ### Working with github
 
+```
+File > New Project > Version Control > Git
+Paste in https://github.com/GiangLeN/dockeRepo.git
 
+```
+
+Since the project use renv, it should be installed automatically. Restore to install appropriate packages.
+
+```
+library("renv")
+
+renv::restore()
+
+```
+
+From there you can edit and update the github repo.
+
+To update the repo you need to sign in to github.
+
+```
+git config --global user.email "your@email"
+git config --global user.name "yourGitUsername"
+
+```
+```
+Save files and select staged to select what to commit.
+Press commit and type message
+
+Press Push and fill in your username and password
+
+Done
+```
+
+You have now created a docker that contains your git repo. This can be shared with others for further development.
