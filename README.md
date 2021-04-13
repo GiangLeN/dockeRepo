@@ -202,7 +202,7 @@ Paste in https://github.com/GiangLeN/dockeRepo.git
 
 ```
 
-Since the project use renv, it should be installed automatically. Restore to install appropriate packages.
+Since the project uses renv, it should be installed automatically. Use renv function restore to install appropriate packages.
 
 ```
 library("renv")
